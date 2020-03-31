@@ -8,15 +8,15 @@ ExcelName = 'C:/Users/Administrator/Desktop/Epidemic-data-abroad.csv'
 #当前日期时间戳
 number = format(time.time() * 100, '.0f')
 
-url = 'https://view.inews.qq.com/g2/getOnsInfo?name=disease_other&callback=&_=%s' % number
-datas = json.loads(requests.get(url=url).json()['data'])
+url = 'https://api.inews.qq.com/newsqa/v1/automation/foreign/country/ranklist'
+datas = requests.get(url=url).json()['data']
 
 #写入表头
 with open(ExcelName, 'w', encoding='utf_8_sig', newline='') as csvfile: #utf_8_sig替换utf-8解决中文乱码问题
     writer = csv.writer(csvfile)
     writer.writerow(["国家","新增确诊","累计确诊","治愈","死亡"])
-    
-for foreign in datas['foreignList']:
+     
+for foreign in datas:
     with open(ExcelName, 'a', encoding='utf-8-sig', newline='') as csvfile:#utf_8_sig替换utf-8解决中文乱码问题
         writer = csv.writer(csvfile)
         writer.writerow([foreign['name'], str(foreign['confirmAdd']), str(foreign['confirm']), str(foreign['heal']), str(foreign['dead'])])
