@@ -1,2 +1,2 @@
 # epidemic-data
-I used the python code on the web with my own modification to get data of COVID-19 epidemic.
+I crawl the data of COVID-19 epidemic from Tecent News using python code.
